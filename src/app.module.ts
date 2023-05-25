@@ -21,6 +21,8 @@ import { LinkingVideoTagEntity } from './linking-video-tags/entities/linking-vid
 import { CommentEntity } from './comments/entities/comment.entity';
 import { ConfigModule } from '@nestjs/config';
 import { ImagesModule } from './images/images.module';
+import { ImageEntity } from './images/entities/image.entity';
+import { VideosModule } from './videos/videos.module';
 
 @Module({
   imports: [
@@ -42,6 +44,7 @@ import { ImagesModule } from './images/images.module';
         LinkingVideoAndPlaylistEntity,
         LinkingVideoTagEntity,
         CommentEntity,
+        ImageEntity,
       ],
       synchronize: true,
     }),
@@ -54,6 +57,7 @@ import { ImagesModule } from './images/images.module';
     TagModule,
     LinkingVideoTagsModule,
     ImagesModule,
+    VideosModule,
   ],
   controllers: [AppController],
   providers: [AppService],
