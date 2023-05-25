@@ -29,10 +29,7 @@ export class UserEntity {
   @Column()
   password: string;
 
-  @Column()
-  registrationDate: Date;
-
-  @Column()
+  @Column({ default: 0 })
   subscribersCount: number;
 
   @OneToOne(() => ImageEntity, (image) => image.user)

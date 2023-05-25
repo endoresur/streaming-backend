@@ -23,6 +23,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ImagesModule } from './images/images.module';
 import { ImageEntity } from './images/entities/image.entity';
 import { VideosModule } from './videos/videos.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -58,6 +59,7 @@ import { VideosModule } from './videos/videos.module';
     LinkingVideoTagsModule,
     ImagesModule,
     VideosModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
