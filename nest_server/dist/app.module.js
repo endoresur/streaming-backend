@@ -28,18 +28,20 @@ const playlist_entity_1 = require("./playlist/entities/playlist.entity");
 const linking_video_and_playlist_entity_1 = require("./linking-video-and-playlist/entities/linking-video-and-playlist.entity");
 const linking_video_tag_entity_1 = require("./linking-video-tags/entities/linking-video-tag.entity");
 const comment_entity_1 = require("./comments/entities/comment.entity");
+const config_1 = require("@nestjs/config");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            config_1.ConfigModule.forRoot(),
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'postgres',
-                host: 'drona.db.elephantsql.com',
-                port: 5432,
-                username: 'shffvmzg',
-                password: 'B8Y45DdZaPXT0kjR7nnCiTAa-xtH446i',
-                database: 'shffvmzg',
+                host: process.env.DB_HOST,
+                port: Number(process.env.DB_PORT) || 5432,
+                username: process.env.DB_USER,
+                password: process.env.DB_PASSWORD,
+                database: process.env.DB_NAME,
                 entities: [
                     video_entity_1.VideoEntity,
                     video_rating_entity_1.VideoRatingEntity,

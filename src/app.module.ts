@@ -19,16 +19,18 @@ import { PlaylistEntity } from './playlist/entities/playlist.entity';
 import { LinkingVideoAndPlaylistEntity } from './linking-video-and-playlist/entities/linking-video-and-playlist.entity';
 import { LinkingVideoTagEntity } from './linking-video-tags/entities/linking-video-tag.entity';
 import { CommentEntity } from './comments/entities/comment.entity';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'drona.db.elephantsql.com',
-      port: 5432,
-      username: 'shffvmzg',
-      password: 'B8Y45DdZaPXT0kjR7nnCiTAa-xtH446i',
-      database: 'shffvmzg',
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT) || 5432,
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
       entities: [
         VideoEntity,
         VideoRatingEntity,
