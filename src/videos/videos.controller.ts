@@ -3,6 +3,7 @@ import {
   Post,
   UseInterceptors,
   UploadedFile,
+  Get,
 } from '@nestjs/common';
 import { VideosService } from './videos.service';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
@@ -13,6 +14,11 @@ import { videoStorage } from './storage';
 @ApiTags('videos')
 export class VideosController {
   constructor(private readonly videosService: VideosService) {}
+
+  @Get()
+  findAll() {
+    return this.videosService.findAll();
+  }
 
   @Post()
   @UseInterceptors(
