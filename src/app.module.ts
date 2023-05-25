@@ -20,6 +20,7 @@ import { LinkingVideoAndPlaylistEntity } from './linking-video-and-playlist/enti
 import { LinkingVideoTagEntity } from './linking-video-tags/entities/linking-video-tag.entity';
 import { CommentEntity } from './comments/entities/comment.entity';
 import { ConfigModule } from '@nestjs/config';
+import { ImagesModule } from './images/images.module';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { ConfigModule } from '@nestjs/config';
     SubscriptionsListModule,
     TagModule,
     LinkingVideoTagsModule,
+    ImagesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

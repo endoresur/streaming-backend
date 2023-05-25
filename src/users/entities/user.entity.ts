@@ -1,4 +1,5 @@
 import { CommentEntity } from 'src/comments/entities/comment.entity';
+import { ImageEntity } from 'src/images/entities/image.entity';
 import { PlaylistEntity } from 'src/playlist/entities/playlist.entity';
 import { SubscriptionsListEntity } from 'src/subscriptions-list/entities/subscriptions-list.entity';
 import { VideoRatingEntity } from 'src/video-rating/entities/video-rating.entity';
@@ -33,6 +34,12 @@ export class UserEntity {
 
   @Column()
   subscribersCount: number;
+
+  @OneToOne(() => ImageEntity, (image) => image.user)
+  avatar: ImageEntity;
+
+  @OneToOne(() => ImageEntity, (image) => image.channelBanner)
+  banner: ImageEntity;
 
   @OneToMany(() => VideoEntity, (video) => video.user)
   videos: VideoEntity[];
