@@ -3,3 +3,9 @@ export const generateId = () =>
     .fill(null)
     .map(() => Math.round(Math.random() * 16).toString(16))
     .join('');
+
+export const generateSlug = (length: number) =>
+  Array(length)
+    .fill(null)
+    .map(() => Math.round(Math.random() * 16).toString(16))
+    .join('');

@@ -24,8 +24,8 @@ export class VideoEntity {
   @Column()
   videoDescription: string;
 
-  // @Column()
-  // uploadDate: Date;
+  @Column({ default: 'slug' })
+  slug: string;
 
   @Column()
   videoLink: string;

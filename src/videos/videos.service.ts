@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { generateSlug } from 'src/utils/generate';
 import { Repository } from 'typeorm';
 import { VideoEntity } from './entities/video.entity';
 
@@ -18,6 +19,7 @@ export class VideosService {
       videoDescription: 'description',
       preview: undefined,
       videoLink: file.path,
+      slug: generateSlug(10),
     });
   }
 

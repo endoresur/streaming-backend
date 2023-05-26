@@ -32,6 +32,9 @@ export class UserEntity {
   @Column({ default: 0 })
   subscribersCount: number;
 
+  @Column({ default: 'slug' })
+  slug: string;
+
   @OneToOne(() => ImageEntity, (image) => image.user)
   avatar: ImageEntity;
 

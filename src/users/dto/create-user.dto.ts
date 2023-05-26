@@ -12,4 +12,6 @@ export class CreateUserDto {
 
   @ApiProperty()
   password: string;
+
+  slug: string;
 }

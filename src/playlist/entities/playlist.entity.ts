@@ -16,6 +16,9 @@ export class PlaylistEntity {
   @Column()
   playlistTitle: string;
 
+  @Column({ default: 'slug' })
+  slug: string;
+
   @ManyToOne(() => UserEntity, (user) => user.playlists)
   user: UserEntity;
 
