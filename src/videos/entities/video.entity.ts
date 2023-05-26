@@ -24,8 +24,8 @@ export class VideoEntity {
   @Column()
   videoDescription: string;
 
-  @Column()
-  uploadDate: Date;
+  // @Column()
+  // uploadDate: Date;
 
   @Column()
   videoLink: string;
@@ -40,20 +40,20 @@ export class VideoEntity {
   user: UserEntity;
 
   @OneToOne(() => ImageEntity, (image) => image.videoPreview)
-  preview: ImageEntity;
+  preview?: ImageEntity;
 
   @OneToMany(() => CommentEntity, (comment) => comment.video)
-  comments: CommentEntity[];
+  comments?: CommentEntity[];
 
   @OneToMany(() => VideoRatingEntity, (rating) => rating.video)
-  ratings: VideoRatingEntity[];
+  ratings?: VideoRatingEntity[];
 
   @OneToMany(
     () => LinkingVideoAndPlaylistEntity,
     (linkedVnP) => linkedVnP.video,
   )
-  linkedVnP: LinkingVideoAndPlaylistEntity[];
+  linkedVnP?: LinkingVideoAndPlaylistEntity[];
 
   @OneToMany(() => LinkingVideoTagEntity, (linkedVnT) => linkedVnT.video)
-  linkedVnT: LinkingVideoTagEntity[];
+  linkedVnT?: LinkingVideoTagEntity[];
 }

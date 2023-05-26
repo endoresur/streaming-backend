@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateVideoDto } from './dto/create-video.dto';
-import { UpdateVideoDto } from './dto/update-video.dto';
 import { VideoEntity } from './entities/video.entity';
 
 @Injectable()
@@ -12,23 +10,30 @@ export class VideosService {
     private repository: Repository<VideoEntity>,
   ) {}
 
-  create(createVideoDto: CreateVideoDto) {
-    return 'This action adds a new video';
+  create(file: Express.Multer.File, userId: number) {
+    return this.repository.save({
+      user: { id: userId },
+      comments: undefined,
+      videoTitle: 'title',
+      videoDescription: 'description',
+      preview: undefined,
+      videoLink: file.path,
+    });
   }
 
   findAll() {
     return this.repository.find();
   }
 
-  // findOne(id: number) {
-  //   return `This action returns a #${id} video`;
-  // }
+  async renameLastByUserId(userId: number, title: string, description: string) {
+    const qb = this.repository.createQueryBuilder('video');
+    qb.where('video.userId = :userId', { userId });
 
-  // update(id: number, updateVideoDto: UpdateVideoDto) {
-  //   return `This action updates a #${id} video`;
-  // }
+    const lastVideoId = (await qb.getMany()).at(-1).id;
 
-  // remove(id: number) {
-  //   return `This action removes a #${id} video`;
-  // }
+    return this.repository.update(lastVideoId, {
+      videoTitle: title,
+      videoDescription: description,
+    });
+  }
 }

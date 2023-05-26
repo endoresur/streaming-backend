@@ -20,10 +20,10 @@ export class UserEntity {
   @Column()
   userName: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
-  @Column()
+  @Column({ unique: true })
   login: string;
 
   @Column()

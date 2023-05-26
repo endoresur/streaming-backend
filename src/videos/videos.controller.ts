@@ -5,16 +5,20 @@ import {
   UploadedFile,
   Get,
   UseGuards,
+  Body,
 } from '@nestjs/common';
 import { VideosService } from './videos.service';
-import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { videoStorage } from './storage';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { CreateVideoDto } from './dto/create-video.dto';
+import { UserId } from 'src/decorators/user-id.decorator';
 
 @Controller('videos')
 @ApiTags('videos')
 @UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
 export class VideosController {
   constructor(private readonly videosService: VideosService) {}
 
@@ -23,7 +27,7 @@ export class VideosController {
     return this.videosService.findAll();
   }
 
-  @Post()
+  @Post('/create-video')
   @UseInterceptors(
     FileInterceptor('file', {
       storage: videoStorage,
@@ -41,7 +45,14 @@ export class VideosController {
       },
     },
   })
-  create(@UploadedFile() file: Express.Multer.File) {
-    return file;
+  create(@UploadedFile() file: Express.Multer.File, @UserId() userId: number) {
+    return this.videosService.create(file, userId);
+  }
+
+  @Post('/rename-video')
+  @ApiBody({ type: CreateVideoDto })
+  async nameVideo(@Body() data: CreateVideoDto, @UserId() userId: number) {
+    const { title, description } = data;
+    return this.videosService.renameLastByUserId(userId, title, description);
   }
 }
