@@ -35,6 +35,9 @@ export class UserEntity {
   @Column({ default: 'slug' })
   slug: string;
 
+  @Column({ default: '' })
+  channelDescription: string;
+
   @OneToOne(() => ImageEntity, (image) => image.user)
   avatar: ImageEntity;
 
